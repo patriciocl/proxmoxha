@@ -1,0 +1,2 @@
+# proxmoxha
+script proxmox homeassiatant
