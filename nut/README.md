@@ -1,11 +1,14 @@
 # System Requirements
 
 
-Proxmox 7 pve
 
+- Proxmox 7 pve
+- UPS / SAI -  SPS 700/500 Salicru
 
 ## Change
-- install packages nut-server nut-client pgwen
+- Install packages nut-server nut-client pgwen
+- Create user for admin and hamon
+- automatic add service to startup ( systemctl )
 
 ## Install:
 

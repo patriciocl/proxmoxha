@@ -141,3 +141,5 @@ echo " "
 
 
 
+systemctl enable nut-server
+systemctl enable nut-client
