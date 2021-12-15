@@ -10,7 +10,7 @@ else
     exit 0
 fi
 
-if (whiptail --title "README" --yesno "Only Support 1 UPS and Regenerate config file \n\n Support:\n\n - Salicru SPS 500 ONE (salicru) " 20 78); then
+if (whiptail --title "README" --yesno "Only Support 1 UPS and Regenerate config file \n\n Support:\n\n - Salicru SPS 500/700 ONE (salicru) " 20 78); then
     echo "User selected Yes, exit status was $?."
 else
     echo "User selected No, exit status was $?."
@@ -21,8 +21,8 @@ fi
 
 
 io=$(whiptail --title "Supported UPS" --radiolist "Choose Option\n\nSpacebar Select\nTab Change Value" 20 78 10 \
-"salicru" "hola" ON \
-"apc" "chao" OFF \
+"salicru" "SALICRU" ON \
+"apc" "APC UPS" OFF \
 3>&1 1>&2 2>&3)
 
 echo "$io"
@@ -136,7 +136,7 @@ echo "PASSWORD : $VPASSWDHAMON"
 echo "HOST: IP_PROXMOX"
 echo "t.me/proxmoxha"
 echo " "
-echo "me quieres invitar una birra"
+echo "me quieres invitar una birra , habla con el jefe jorge"
 echo " "
 
 
