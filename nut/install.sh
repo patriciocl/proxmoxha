@@ -66,17 +66,6 @@ cat << EOF > $NUT/nut.conf
 MODE=netserver
 EOF
 
-echo "Write ups.conf" 
-cat << EOF > $NUT/ups.conf
-
-maxretry = 3
-[ups]
-    driver = usbhid-ups
-    port = auto
-    desc = "Server UPS"
-    vendorid = "051D"
-EOF
-
 echo "Write upsd.conf" 
 cat << EOF >  $NUT/upsd.conf
 LISTEN 0.0.0.0 3493
