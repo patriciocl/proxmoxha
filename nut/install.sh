@@ -137,5 +137,6 @@ echo "Now add integration nut on homeassisant"
 echo "USER: hamon"
 echo "PASSWORD : $VPASSWDADMIN"
 echo "HOST: IP_PROXMOX"
+echo "t.me/proxmoxha"
 
 
