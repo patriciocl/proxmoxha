@@ -132,10 +132,10 @@ case $io in
         ;;
 esac
 
-echo ""
+echo " "
 echo "Now add integration nut on homeassisant"
 echo "USER: hamon"
-echo "PASSWORD : $VPASSWDADMIN
+echo "PASSWORD : $VPASSWDADMIN"
 echo "HOST: IP_PROXMOX"
 
 
