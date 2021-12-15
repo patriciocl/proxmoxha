@@ -132,11 +132,22 @@ case $io in
         ;;
 esac
 
+systemctl start nut-server
+systemctl start nut-client
+systemctl status nut-server
+
+
+echo " "
+echo " "
 echo " "
 echo "Now add integration nut on homeassisant"
 echo "USER: hamon"
 echo "PASSWORD : $VPASSWDADMIN"
 echo "HOST: IP_PROXMOX"
 echo "t.me/proxmoxha"
+echo " "
+echo "me quieres invitar una birra"
+echo " "
+
 
 
