@@ -30,7 +30,7 @@ echo "$io"
 function ups-apc() {
 cat << EOF > $NUT/ups.conf
 maxretry = 3
-[salicru]
+[ups]
   driver = blazer_usb
   port = auto
   desc = "SPS ONE"
@@ -40,7 +40,7 @@ EOF
 
 function ups-salicru() {
 cat << EOF > $NUT/ups.conf
-[salicru]
+[ups]
   driver = blazer_usb
   port = auto
   desc = "SPS ONE"
