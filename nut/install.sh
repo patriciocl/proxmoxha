@@ -40,6 +40,7 @@ EOF
 
 function ups-salicru() {
 cat << EOF > $NUT/ups.conf
+[salicru]
   driver = blazer_usb
   port = auto
   desc = "SPS ONE"
