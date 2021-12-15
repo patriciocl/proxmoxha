@@ -79,7 +79,7 @@ cat << EOF > $NUT/upsd.users
 	instcmds = ALL
 
 	[hamon]
-	password  = VPASSWDADMIN
+	password  = $VPASSWDHAMON
 	upsmon slave
 EOF
 
@@ -95,7 +95,7 @@ POWERDOWNFLAG /etc/killpower
 RBWARNTIME 43200
 NOCOMMWARNTIME 300
 FINALDELAY 5
-MONITOR ups@127.0.0.1 1 hamon $VPASSWDADMIN master
+MONITOR ups@127.0.0.1 1 hamon $VPASSWDHAMON master
 EOF
 
 
@@ -132,7 +132,7 @@ echo " "
 echo " "
 echo "Now add integration nut on homeassisant"
 echo "USER: hamon"
-echo "PASSWORD : $VPASSWDADMIN"
+echo "PASSWORD : $VPASSWDHAMON"
 echo "HOST: IP_PROXMOX"
 echo "t.me/proxmoxha"
 echo " "
