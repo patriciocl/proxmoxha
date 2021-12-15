@@ -2,14 +2,15 @@
 # Version 0
 # t.me/proxmoxha
 
-if (whiptail --title "README" --yesno "Script Install Basic packages for nut" 8 78); then
+
+if (whiptail --title "README" --yesno "Script Install Basic packages for nut" 20 78); then
     echo "User selected Yes, exit status was $?."
 else
     echo "User selected No, exit status was $?."
     exit 0
 fi
 
-if (whiptail --title "README" --yesno "Only Support 1 UPS and Regenerate config file" 8 78); then
+if (whiptail --title "README" --yesno "Only Support 1 UPS and Regenerate config file \n\n Support:\n\n - Salicru SPS 500 ONE (salicru) " 20 78); then
     echo "User selected Yes, exit status was $?."
 else
     echo "User selected No, exit status was $?."
@@ -19,29 +20,45 @@ fi
 
 
 
-io=$(whiptail --title "Supported UPS" --radiolist "Choose Option\n\nSpacebar Select\nTab Change Value" 30 78 2 \
+io=$(whiptail --title "Supported UPS" --radiolist "Choose Option\n\nSpacebar Select\nTab Change Value" 20 78 10 \
 "salicru" "hola" ON \
 "apc" "chao" OFF \
 3>&1 1>&2 2>&3)
 
 echo "$io"
 
+function ups-apc() {
+cat << EOF > $NUT/ups.conf
+maxretry = 3
+[salicru]
+  driver = blazer_usb
+  port = auto
+  desc = "SPS ONE"
 
+EOF
+}
 
-systemctl stop nut-server nut-client
-apt-get update
-apt-get install nut-server nut-client pwgen  -y 
+function ups-salicru() {
+cat << EOF > $NUT/ups.conf
+  driver = blazer_usb
+  port = auto
+  desc = "SPS ONE"
+EOF
+}
+
 
 
 NUT=/etc/nut
 systemctl stop nut-server nut-client
-#apt-get update
-#apt-get install nut-server nut-client pwgen  -y
+apt-get update
+apt-get install nut-server nut-client pwgen  -y
 
 PASSWDHAMON=$(pwgen -A 20 1)
 PASSWDADMIN=$(pwgen -s 40 1)
 
-echo $PASSHAMON - $PASSADMIN
+
+VPASSWDHAMON=$PASSWDHAMON
+VPASSWDADMIN=$PASSWDADMIN
 
 echo "Write nut.conf"
 cat << EOF > $NUT/nut.conf
@@ -67,12 +84,12 @@ EOF
 echo "Write upsd.users"
 cat << EOF > $NUT/upsd.users
 	[admin]
-	password = $PASSADMIN
+	password = $VPASSWDADMIN
 	actions = SET
 	instcmds = ALL
 
 	[hamon]
-	password  = $PASSHAMON
+	password  = VPASSWDADMIN
 	upsmon slave
 EOF
 
@@ -88,7 +105,7 @@ POWERDOWNFLAG /etc/killpower
 RBWARNTIME 43200
 NOCOMMWARNTIME 300
 FINALDELAY 5
-MONITOR ups@127.0.0.1 1 hpmon $PASSHAMON master
+MONITOR ups@127.0.0.1 1 hamon $VPASSWDADMIN master
 EOF
 
 
@@ -103,5 +120,22 @@ cat << EOF > $NUT/upsset.conf
 EOF
 
 
-echo "follow domotic"
+echo "Write config"
+case $io in
+  salicru)
+	echo "Write ups.conf salicru"
+	ups-salicru
+	;;
+
+	*)
+	echo fin
+        ;;
+esac
+
+echo ""
+echo "Now add integration nut on homeassisant"
+echo "USER: hamon"
+echo "PASSWORD : $VPASSWDADMIN
+echo "HOST: IP_PROXMOX"
+
 
