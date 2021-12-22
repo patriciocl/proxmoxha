@@ -124,7 +124,6 @@ esac
 
 systemctl start nut-server
 systemctl start nut-client
-systemctl status nut-server
 
 
 echo " "
